@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TinkoffNews</string>
+    <string name="msg_error">Failed loading data!</string>
+    <string name="title_activity_topic_view">News topic</string>
+</resources>
