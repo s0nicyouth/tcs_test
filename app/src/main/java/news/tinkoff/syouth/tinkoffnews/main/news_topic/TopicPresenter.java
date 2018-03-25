@@ -1,18 +1,18 @@
 package news.tinkoff.syouth.tinkoffnews.main.news_topic;
 
+import news.tinkoff.syouth.tinkoffnews.main.base.BasePresenter;
 import news.tinkoff.syouth.tinkoffnews.main.utils.Result;
 
 /**
  * Created by antonivanov on 24.03.18.
  */
 
-public class TopicPresenter implements TopicContract.Presenter {
+public class TopicPresenter extends BasePresenter<TopicContract.View> implements TopicContract.Presenter {
     private TopicContract.Model mModel;
-    private TopicContract.View mView;
 
     TopicPresenter(TopicContract.Model model, TopicContract.View view) {
+        super(view);
         mModel = model;
-        mView = view;
     }
 
     @Override
@@ -20,12 +20,12 @@ public class TopicPresenter implements TopicContract.Presenter {
         mModel.getContent(id, new Result<String>() {
             @Override
             public void onSuccess(String res) {
-                mView.showContent(res);
+                runOnView(view -> view.showContent(res));
             }
 
             @Override
             public void onError(Throwable e) {
-                mView.showError();
+                runOnView(TopicContract.View::showError);
             }
         });
     }
